@@ -1,0 +1,11 @@
+clear all;
+clc;
+close all;
+bstream = [0 1 0 1 1 0];
+bitrate=1000;
+s_freq=10*bitrate;
+c_freq=2*bitrate;
+t=10:0.55:10;
+carrier=cos(2*pi/c_freq*t);
+disp('bstream = ');
+disp(bstream);

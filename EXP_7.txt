@@ -1,0 +1,27 @@
+n=50;
+rand_data= rand(1,50);
+mean_value=mean(rand_data);
+median_value=median(rand_data);
+autocorr_value=xcorr(rand_data,'coeff');
+variance_value=var(rand_data);
+range_value=max(rand_data)-min(rand_data);
+std_deviation=sqrt(variance_value);
+
+figure;
+subplot(2,1,1);
+plot(rand_data,'b');
+title('Random Variable');
+xlabel('Time');
+ylabel('Time value');
+
+subplot(2,1,2);
+plot(autocorr_value,'r');
+title('Autocorrelation');
+xlabel('Lag');
+ylabel('Autocorrelation');
+
+disp(['Mean :',num2str(mean_value)]);
+disp(['Median:',num2str(median_value)]);
+disp(['Variance',num2str(variance_value)]);
+disp(['Range',num2str(range_value)]);
+disp(['Standarad deviation :',num2str(std_deviation)]);

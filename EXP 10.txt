@@ -1,0 +1,14 @@
+clc;
+clear all;
+close all;
+coderate=0.5;
+cons_len= input("Enter the constraint length:");
+m=input("Enter the message(binary vector):")
+trellis=poly2trellis(cons_len,[5,7]);
+c=convenc(m,trellis);
+r=[1 1 1 1 0 0 1 0 1 0 0 0];
+cc=vitdec(r,trellis,6,'trunc','hard');
+disp('Encoded Message:');
+disp(c);
+disp('decoded Message:');
+disp(cc);

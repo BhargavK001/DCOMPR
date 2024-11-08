@@ -1,0 +1,36 @@
+symbols = {'A', 'E', 'H', 'N', 'G', 'S'};  
+prob = [0.19, 0.15, 0.2, 0.16, 0.4, 0.08]; 
+prob = prob / sum(prob); 
+disp('Normalized Probabilities:');
+disp(prob);
+disp(['Sum of Probabilities: ', num2str(sum(prob))]);
+try
+   dict = huffmandict(symbols, prob); 
+catch ME
+    disp('Error generating Huffman dictionary:');
+    disp(ME.message);
+    return;
+end
+disp('Huffman Dictionary:');
+disp(dict);
+test_message = {'A', 'H', 'N', 'G', 'S'}; 
+encoded_message = huffmanenco(test_message, dict);
+disp('Encoded Message:');
+disp(encoded_message);
+binary_sequence = [0 1 0 1 1 1 0 1 0 1 0 1 0 0];  
+decoded_message = huffmandeco(binary_sequence, dict);
+disp('Decoded Message:');
+disp(decoded_message);
+code_lengths = cellfun(@length, dict(:, 2));  
+disp('Code Lengths:');
+disp(code_lengths);
+L = sum(prob * code_lengths); 
+disp(['Average Code Length (L): ', num2str(L)]);
+H = -sum(prob .* log2(prob)); 
+disp(['Entropy (H): ', num2str(H)]);
+if isscalar(H) && isscalar(L) && L > 0
+    efficiency = (H / L) * 100;
+    disp(['Efficiency of the Code: ', num2str(efficiency), '%']);
+else
+    disp('Error: Invalid scalar values for H or L.');
+end
